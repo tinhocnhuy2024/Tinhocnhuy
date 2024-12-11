@@ -24,10 +24,9 @@ cloudinary.config({
 
 async function get_Uploadfile(req: Request, res: Response) {
     res.render('demo.ejs')
-    // res.render('createpost')
 }
 async function post_Uploadfile(req: Request, res: Response) {
-    //đã cấu hình ở server.ts-đóng cmt
+
     uploadFile(req, res, (error) => {
         if (error) {
             return res.send(`Error when trying to upload: ${error}`);

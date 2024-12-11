@@ -1,18 +1,14 @@
 import { Request, Response } from "express";
 import Types_News_Model from "../Model/Types_News_Models";
-import unidecode from "unidecode";
-import { convertToSlug, randomStringPost } from "../Services/sp";
+import { convertToSlug } from "../Services/sp";
 
-//THÊM DANH MỤC BÀI VIẾT
 async function createTypes_News(req: Request, res: Response) {
     try {
         const name = req.body.name;
         if (name == '') {
             return res.json({ message: 'Vui lòng điền đầy đủ thông tin' })
         }
-        //MÃ hóa slug
         const id = convertToSlug(name)
-
         const findIdCategories_News = await Types_News_Model.findOne({ id: id })
         if (findIdCategories_News) {
             return res.json({ message: 'Danh mục đã tồn tại' })
@@ -27,7 +23,6 @@ async function createTypes_News(req: Request, res: Response) {
     }
 }
 
-//CẬP NHẬT DANH MỤC BÀI VIẾT
 async function updateTypes_News(req: Request, res: Response) {
     const id = req.params.id;
     const name = req.body.name;
@@ -41,7 +36,6 @@ async function updateTypes_News(req: Request, res: Response) {
     }
 }
 
-//XÓA DANH MỤC BÀI viết
 async function deleteType_News(req: Request, res: Response) {
     const id = req.params.id
     try {
@@ -52,7 +46,6 @@ async function deleteType_News(req: Request, res: Response) {
     }
 }
 
-//TÌM KIẾM DANH MỤC BÀI VIẾT
 async function loadTypes_News(req: Request, res: Response) {
     try {
         const name = req.body.name
@@ -72,13 +65,9 @@ async function loadTypes_News2(req: Request, res: Response) {
         return res.status(500).json(error)
     }
 }
-//TẤT CẢ DANH MỤC BÀI VIẾT
 async function loadAllType_News(req: Request, res: Response) {
     try {
-        //load name
         const allType = await Types_News_Model.find({});
-        //load all
-        // const allCategories = await CategoriesModel.find();
         return res.json(allType);
     } catch (error) {
         return res.json(error);
@@ -87,13 +76,11 @@ async function loadAllType_News(req: Request, res: Response) {
 
 async function getSortedData(priorityId: string) {
     const data = await Types_News_Model.find({});
-    // Sắp xếp mềm dựa trên `priorityId`
     const sortedData = data.sort((a, b) => {
-        if (a.id === priorityId) return -1; // Đưa phần tử có `id` ưu tiên lên đầu
-        if (b.id === priorityId) return 1;  // Giữ nguyên thứ tự
-        return 0; // Giữ nguyên thứ tự các phần tử khác
+        if (a.id === priorityId) return -1;
+        if (b.id === priorityId) return 1;
+        return 0;
     });
-    // console.log(sortedData);
     return sortedData
 }
 

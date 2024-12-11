@@ -1,7 +1,6 @@
 import express from "express";
 import { middleware } from "../../middleware/jwt";
 import {authorize} from "../../middleware/authorize";
-// import { About_Index } from "../../Controller/Display/About_index";
 import { About_Index } from "../Display_Controller/About_index";
 import { midlleware_file } from "../../middleware/file";
 

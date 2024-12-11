@@ -5,7 +5,6 @@ import { sendMail_ForgotPassword, OTPDangki } from "../Services/mailer";
 import { randomNumber, randomNumber_ForgotPassword } from "../Services/mailer";
 import { generateAccessToken, generateRefreshToken } from "../middleware/jwt"
 
-//ĐĂNG KÝ TÀI KHOẢN
 var username: string
 var fullname: string
 var password: string
@@ -54,8 +53,6 @@ async function get_Register(req: Request, res: Response) {
         }
         if (errRgt == 0) {
            await OTPDangki(req, res);
-            // sendMail(req, res);
-            // console.log(randomNumber);
             res.json({ message: "Vui lòng kiểm tra Email của bạn" })
         }
     } catch (error) {
@@ -73,10 +70,8 @@ async function post_Register(req: Request, res: Response) {
         if (randomNumber == 0) {
             return res.json({ message: "Mã OTP đã hết hạn" })
         } else {
-            //mã hóa mật khẩu
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
-            //lưu user đã được mã hóa mk
             await AccountModel.create({
                 username: username,
                 fullname: fullname,
@@ -94,9 +89,8 @@ async function post_Register(req: Request, res: Response) {
 async function getLogin(res: Response) {
     res.send('login')
 }
-//bien username luu vao post
+
 export var authorization: string;
-//ĐĂNG NHẬP
 async function login(req: Request, res: Response) {
     var username = req.body.username;
     var password = req.body.password;
@@ -113,7 +107,6 @@ async function login(req: Request, res: Response) {
             err + 1;
             return res.status(500).json({ message: "Mật khẩu không đúng" })
         }
-        //truong hop dang nhap thanh cong
         if (err == 0) {
             const accesstoken = generateAccessToken(username);
             const refreshtoken = generateRefreshToken(username);
@@ -122,14 +115,11 @@ async function login(req: Request, res: Response) {
                 { username: username },
                 { $set: { refreshtoken: refreshtoken } }
             )
-            // authorization = username
-            // console.log("id:=====" + req.userId + "==" + authorization)
             return res.json({ message: "Đăng nhập thành công", accesstoken, refreshtoken })
         }
     }
 }
 
-//RESET PASSWORD 8 KI TU
 function generateRandomString(length: number): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -144,7 +134,6 @@ function generateRandomString(length: number): string {
 const randomString = generateRandomString(8);
 
 var emailForgotpass: string
-//QUÊN MẬT KHẨU
 async function get_ForgotPassword(req: Request, res: Response) {
     try {
         const email = req.body.email;
@@ -156,9 +145,7 @@ async function get_ForgotPassword(req: Request, res: Response) {
             res.json({ message: "Vui lòng kiểm tra email của bạn" });
             emailForgotpass = email
             console.log(emailForgotpass)
-            // console.log(randomString)
         }
-
     } catch (error) {
         res.status(505).json(error)
     }
@@ -171,10 +158,7 @@ async function post_ForgotPassword(req: Request, res: Response) {
             return res.json({ message: "Mã OTP đã hết hạn" })
         } if (otp != randomNumber_ForgotPassword || otp == null) {
             return res.json({ message: "Mã OTP không đúng" })
-            //    console.log(randomNumber + "-------" + otp)
         } else {
-            //mã hóa mật khẩu
-            // randomString
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(randomString, salt);
             await AccountModel.findOneAndUpdate({ email: emailForgotpass }, { password: hashedPassword })
@@ -185,7 +169,6 @@ async function post_ForgotPassword(req: Request, res: Response) {
     }
 }
 
-//ĐỔI MẬT KHẨU
 async function changePassword(req: Request, res: Response) {
     const password = req.body.password;
     const newpassword = req.body.newpassword;
@@ -207,7 +190,6 @@ async function changePassword(req: Request, res: Response) {
         res.status(500).json({ message: "Mật khẩu không đúng" })
     }
     if (err == 0) {
-        //mã hóa mật khẩu
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(renewpassword, salt);
         await AccountModel.findOneAndUpdate({ username: req.userId }, { password: hashedPassword })
@@ -215,7 +197,6 @@ async function changePassword(req: Request, res: Response) {
     }
 }
 
-//CẬP NHẬT TÀI KHOẢN
 async function putAccount(req: Request, res: Response) {
     const fullname = req.body.fullname;
     const email = req.body.email;
@@ -271,5 +252,4 @@ export const Account = {
     changePassword,
     putAccount,
     // logout
-    // getUploadDemo,
 };

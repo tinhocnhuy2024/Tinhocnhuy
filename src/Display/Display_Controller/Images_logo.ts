@@ -14,9 +14,7 @@ async function createImageLogo(req: Request, res: Response) {
         return res.status(400).json("No image provided.")
     } else {
         images_about_index = await uploadImageToCloudinary(link_image_about);
-        //lấy public_id của hình ảnh-lưu vào cloud
         const public_id = getPublicIdFromUrl(images_about_index)
-        //lưu vào database
         await Images_logo_Model.create({
             link_Images: images_about_index,
             public_id: public_id,
@@ -38,7 +36,7 @@ async function deleteImageLogo(req: Request, res: Response) {
         if (deleteimages) {
             const urlObject = new URL(deleteimages);
             const path = urlObject.pathname;
-            const x = path.substring(path.indexOf('Tinhocnhuy/'), path.lastIndexOf('.'));
+            const x = path.substring(path.indexOf('Tinhocnhuy.com/'), path.lastIndexOf('.'));
             await deleteImageFromCloudinary(x)
         }
         await Images_logo_Model.deleteOne({ public_id: idImage })

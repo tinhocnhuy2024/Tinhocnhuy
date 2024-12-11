@@ -4,14 +4,10 @@ import TagModel from "../Model/Tag_Models";
 async function createTag(req: Request, res: Response) {
     try {
         const tag = req.body.tag;
-        // const tagRegex=/^\S+$/;
         const findTag = await TagModel.findOne({ name: tag })
         if (findTag) {
             return res.status(500).json({ message: "Tag đã tồn tại" });
         }
-        // if (!tagRegex.test(tag)){
-        //     return res.status(500).json({ message: "Tag không được chứa kí tự khoảng trắng" });
-        // }
         else {
             await TagModel.create({
                 name: tag

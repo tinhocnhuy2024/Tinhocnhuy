@@ -22,13 +22,4 @@ const accountSchema: Schema = new Schema<Account>({
 
 const AccountModel = mongoose.model<Account>('Accounts', accountSchema);
 
-// module.exports = AccountModel
 export default AccountModel;
-
-// export default class Account{
-//     constructor(
-//         public username:string,
-//         public password: string,
-//         public id?:ObjectId
-//     ){}
-// }

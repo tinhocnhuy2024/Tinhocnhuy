@@ -13,9 +13,7 @@ async function createAboutImages(req: Request, res: Response) {
         return res.status(400).json("No image provided.")
     } else {
         link = await uploadImageToCloudinary(link_image);
-        //lấy public_id của hình ảnh-lưu vào cloud
         const public_id = getPublicIdFromUrl(link)
-        //lưu vào database
         await About_images_Model.create({
             link_images: link,
             public_id: public_id,

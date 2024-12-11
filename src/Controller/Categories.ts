@@ -1,19 +1,11 @@
 import { Request, Response } from "express";
 import CategoriesModel from "../Model/Categories_Model";
-import unidecode from "unidecode";
 import { randomStringPost, convertToSlug } from "../Services/sp";
 
-//THÊM DANH MỤC
 async function createCategories(req: Request, res: Response) {
     try {
         const name = req.body.name;
-        //mã hóa Loại bài viết
         const id = convertToSlug(name)
-
-        // const titleNoAccent = unidecode(name);
-        // const encodedStr = encodeURIComponent(titleNoAccent).replace(/%20/g, '-');
-        // const id = decodeURIComponent(encodedStr);
-
         const findIdCategories = await CategoriesModel.findOne({ id: id })
         var newIdCategory
         if (!findIdCategories) {
@@ -35,7 +27,6 @@ async function createCategories(req: Request, res: Response) {
     }
 }
 
-//CẬP NHẬT DANH MỤC
 async function updateCategories(req: Request, res: Response) {
     const id = req.params.id;
     const name = req.body.name;
@@ -49,7 +40,6 @@ async function updateCategories(req: Request, res: Response) {
     }
 }
 
-//XÓA DANH MỤC
 async function deleteCategories(req: Request, res: Response) {
     const id = req.params.id
     try {
@@ -60,7 +50,6 @@ async function deleteCategories(req: Request, res: Response) {
     }
 }
 
-//TÌM KIẾM DANH MỤC
 async function loadCategories(req: Request, res: Response) {
     try {
         const name = req.body.name
@@ -70,13 +59,10 @@ async function loadCategories(req: Request, res: Response) {
         return res.status(500).json(error)
     }
 }
-//TẤT CẢ DANH MỤC
+
 async function loadAllCategories(req: Request, res: Response) {
     try {
-        //load name
         const allCategories = await CategoriesModel.find({});
-        //load all
-        // const allCategories = await CategoriesModel.find();
         return res.json(allCategories);
     } catch (error) {
         return res.json(error);

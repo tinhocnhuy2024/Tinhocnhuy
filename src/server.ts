@@ -24,10 +24,7 @@ dotenv.config();
 
 const date = new Date();
 
-//npm start
-//HIEN GIO KHI BUILD
 const formatted = date.toTimeString();
-//ket noi csdl mongoDB
 mongoose
     .connect(CONFIG.mongo.url)
     .then(() => {
@@ -43,27 +40,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//KET NOI cloudinary/
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 })
-// cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
-//     { public_id: "olympic_flag" },
-//     function (error, result) { console.log(result); });
-
-// Sử dụng cookie-parser middleware
-
-// app.use(cookieParser());
-// // Xét session
-// app.use(
-//     session({
-//         secret: 'this-is-a-long-and-complex-secret-key',
-//         resave: false,
-//         saveUninitialized: true,
-//     })
-// );
 
 // Add headers before the routes are defined
 app.use(function (req, res, next) {
@@ -89,7 +70,6 @@ app.use(function (req, res, next) {
 
 
 app.get('/', function (req: Request, res: Response) {
-    // uploadgg()
     res.json("Trang này của tao")
 })
 

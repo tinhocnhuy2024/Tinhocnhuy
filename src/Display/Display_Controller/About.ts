@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-// import { About_Model } from "../../Model/Display_Model/About_Model";
 import { About_Model } from "../Display_Model/About_Model";
 import { convertToSlug, deleteImageFromCloudinary, randomStringPost, uploadImageToCloudinary } from "../../Services/sp";
 
@@ -87,7 +86,7 @@ async function deleteAbout(req: Request, res: Response) {
         if (idimages) {
             const urlObject = new URL(idimages);
             const path = urlObject.pathname;
-            const idImage = path.substring(path.indexOf('Tinhocnhuy/'), path.lastIndexOf('.'));
+            const idImage = path.substring(path.indexOf('Tinhocnhuy.com/'), path.lastIndexOf('.'));
             await deleteImageFromCloudinary(idImage)
         }
         await About_Model.deleteOne({ id: id });

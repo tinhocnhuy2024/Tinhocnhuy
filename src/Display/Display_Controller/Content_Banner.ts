@@ -87,7 +87,7 @@ async function deleteContent_Banner(req: Request, res: Response) {
         if (idimages) {
             const urlObject = new URL(idimages);
             const path = urlObject.pathname;
-            const idImage = path.substring(path.indexOf('Tinhocnhuy/'), path.lastIndexOf('.'));
+            const idImage = path.substring(path.indexOf('Tinhocnhuy.com/'), path.lastIndexOf('.'));
             await deleteImageFromCloudinary(idImage)
         }
         await Content_Banner_Model.deleteOne({ id: id });
