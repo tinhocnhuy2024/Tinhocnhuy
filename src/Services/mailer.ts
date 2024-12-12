@@ -14,6 +14,7 @@ function generateRandomNumber(): number {
 let testAccount = nodemailer.createTestAccount();
 let transporter = nodemailer.createTransport({
   service: "Gmail",
+  pool:true,
   auth: {
     user: process.env.emailAddress,
     pass: process.env.emailPassword
