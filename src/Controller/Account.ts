@@ -215,17 +215,14 @@ async function putAccount(req: Request, res: Response) {
     }
 }
 
-//ĐĂNG XUẤT TÀI KHOẢN
 // async function logout(req:Request, res:Response) {
 //     try {
 //         const refreshToken=req.headers.authorization?.split(" ")[1];
 
-//         // Kiểm tra xem refreshToken có tồn tại hay không
 //         if (!refreshToken) {
 //             return res.status(400).json({ message: "Không tìm thấy refresh token" });
 //         }
 
-//         // Hủy bỏ refreshToken bằng cách xóa nó khỏi cơ sở dữ liệu
 //         await AccountModel.findOneAndUpdate(
 //             { refreshToken: refreshToken },
 //             { $unset: { refreshToken: "" } }

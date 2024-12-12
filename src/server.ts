@@ -73,41 +73,26 @@ app.get('/', function (req: Request, res: Response) {
     res.json("Trang này của tao")
 })
 
-//token
 app.use('/api', token_Router);
-//Account
 app.use('/api', Account_Router);
-//auth
 app.use('/api', Authentication_Router);
-//post
 app.use('/api', post_Router);
-//news
 app.use('/api', news_Router);
-//categories
 app.use('/api', categories_Router);
-//types_news
 app.use('/api', types_Router);
-//tag
 app.use('/api', tag_Router);
 
 //Display
-//about_Index
 app.use('/api', About_index_Router);
-//about_Images
 app.use('/api', About_Images_Router);
-//Image_Logo
 app.use('/api', Images_logo_Router);
-//About
 app.use('/api', About_Router);
-//Content_banner
 app.use('/api', Content_Banner_Router);
-//Contact_Router
 app.use('/api', Contact_Router);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src', 'views'));
 app.use(express.static(path.join(__dirname, '../public')));
-// app.use(express.static('public'));
 
 app.listen(CONFIG.Server.port, () => {
     console.log(`Example app listening at http://localhost:${CONFIG.Server.port} (${formatted})`)

@@ -35,7 +35,7 @@ post_Router.get('/allslugpost', Post.AllSlugPost);
 
 post_Router.get('/allslugpost_news', Post.AllSlugPost_News)
 
-//upload hình ảnh lên cloudinary , sử dụng cho Bài viết và Tin tức
+//upload hình ảnh lên cloudinary , sử dụng cho Bài viết
 post_Router.post('/uploadimagesPost', midlleware_file, Post.uploadImagesPost);
 
 export default post_Router;

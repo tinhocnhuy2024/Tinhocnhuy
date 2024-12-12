@@ -63,7 +63,7 @@ async function updateContentBanner(req: Request, res: Response) {
             if (old_image) {
                 const urlObject = new URL(old_image);
                 const path = urlObject.pathname;
-                const idImage = path.substring(path.indexOf('Tinhocnhuy/'), path.lastIndexOf('.'));
+                const idImage = path.substring(path.indexOf('Tinhocnhuy.com/'), path.lastIndexOf('.'));
                 await deleteImageFromCloudinary(idImage)
             }
             images = await uploadImageToCloudinary(linkimages);
