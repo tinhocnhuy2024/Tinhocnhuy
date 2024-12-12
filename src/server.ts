@@ -70,7 +70,7 @@ app.use(function (req, res, next) {
 
 
 app.get('/', function (req: Request, res: Response) {
-    res.json("Trang này của tao")
+    res.json("SERVICE API")
 })
 
 app.use('/api', token_Router);
