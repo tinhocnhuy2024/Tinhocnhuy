@@ -2,7 +2,7 @@ import express from "express";
 import { Account } from "../Controller/Account";
 import { upload } from "../uploadfile";
 import { middleware, requestRefreshToken } from "../middleware/jwt"
-import { contact2 } from "../Services/mailer";
+import { contact } from "../Services/mailer";
 const Account_Router = express();
 
 Account_Router.post('/register', Account.get_Register);
@@ -21,7 +21,7 @@ Account_Router.post('/changePass', middleware, Account.changePassword);
 
 Account_Router.post('/putAccount', middleware, Account.putAccount);
 
-Account_Router.post('/contact', contact2);
+Account_Router.post('/contact', contact);
 
 // auth_Router.post('/logout', auth.logout);
 
