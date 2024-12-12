@@ -13,6 +13,9 @@ const REFRESH = process.env.JWT_SECRET_REFRESH || '';
 
 const EMAIL_API=process.env.EMAIL_API;
 
+const EMAIL_ADDRESS=process.env.emailAddress
+const EMAIL_PASSWORD=process.env.emailPassword
+
 const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME;
 const API_KEY = process.env.CLOUDINARY_API_KEY;
 const API_SECRET = process.env.CLOUDINARY_API_SECRET;
@@ -33,6 +36,10 @@ export const CONFIG = {
         cloud_name: CLOUD_NAME,
         api_key: API_KEY,
         api_secret: API_SECRET
+    },
+    email:{
+        emailaddress: EMAIL_ADDRESS,
+        emailpassword: EMAIL_PASSWORD
     },
 EMAIL_API
 };

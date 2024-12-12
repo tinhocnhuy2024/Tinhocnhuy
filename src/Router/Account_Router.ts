@@ -2,7 +2,7 @@ import express from "express";
 import { Account } from "../Controller/Account";
 import { upload } from "../uploadfile";
 import { middleware, requestRefreshToken } from "../middleware/jwt"
-import { contact, contact2 } from "../Services/mailer";
+import { contact2 } from "../Services/mailer";
 const Account_Router = express();
 
 Account_Router.post('/register', Account.get_Register);
