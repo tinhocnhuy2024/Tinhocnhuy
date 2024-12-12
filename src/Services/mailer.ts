@@ -11,6 +11,15 @@ function generateRandomNumber(): number {
   return Math.floor(Math.random() * 1000000);
 }
 
+let testAccount = nodemailer.createTestAccount();
+let transporter = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: process.env.emailAddress,
+    pass: process.env.emailPassword
+  }
+});
+
 export let randomNumber: number = 0
 
 export let randomNumber_ForgotPassword: number = 0
@@ -27,15 +36,6 @@ export const OTPDangki = async function mail(req: Request, res: Response) {
   let countdown = setTimeout(() => {//
     randomNumber = 0;
   }, countDownTime);
-
-  await nodemailer.createTestAccount();
-  let transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: "websitetinhocnhuy@gmail.com",
-      pass: "flvpyhbcdaizmdls"
-    }
-  })
 
   const msg = {
     to: email, // Change to your recipient
@@ -66,15 +66,6 @@ export const sendMail_ForgotPassword = async function mail_forgotPass(req: Reque
     randomNumber_ForgotPassword = 0;
   }, countDownTime);
 
-  await nodemailer.createTestAccount();
-  let transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: "websitetinhocnhuy@gmail.com",
-      pass: "flvpyhbcdaizmdls"
-    }
-  })
-
   const msg = {
     to: email,
     from: 'websitetinhocnhuy@gmail.com',
@@ -99,15 +90,6 @@ export const contact = async function Email(req: Request, res: Response) {
   const subject = req.body.subject
   const info = req.body.info
   const text = req.body.text
-
-  let testAccount = await nodemailer.createTestAccount();
-  let transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: "websitetinhocnhuy@gmail.com",
-      pass: "flvpyhbcdaizmdls"
-    }
-  });
 
   let infoemail = await transporter.sendMail({
     from: `"Khách hàng (${contact}) - Tinhocnhuy.com" <sender@gmail.com>`,
