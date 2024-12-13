@@ -1,4 +1,4 @@
-import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { CONFIG } from '../config/config';
 import AccountModel from '../Model/Account_Model';

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { randomStringPost } from "../Services/sp";
 import { NewsModel } from "../Model/News_Models";
 import Types_News_Model from "../Model/Types_News_Models"
-import { uploadImageToCloudinary, deleteImageFromCloudinary, convertToSlug} from "../Services/sp"
+import { uploadImageToCloudinary, deleteImageFromCloudinary, convertToSlug } from "../Services/sp"
 import { v2 as cloudinary } from 'cloudinary';
 
 var publicId: any;
@@ -13,7 +13,7 @@ export async function uploadImagesNews(req: Request, res: Response) {
         return res.status(400).json({ message: 'No file uploaded' });
     }
     try {
-        const result = await cloudinary.uploader.upload_stream({ resource_type: 'auto', folder: 'Tinhocnhuy.com' },
+        await cloudinary.uploader.upload_stream({ resource_type: 'auto', folder: 'Tinhocnhuy.com' },
             async (error, result) => {
                 if (error) {
                     console.error('Upload failed:', error);
@@ -74,7 +74,7 @@ async function post_CreateNews(req: Request, res: Response) {
             id = slug + '-' + randomStringPost
         }
         thumbnailUrl = await uploadImageToCloudinary(linkfile);
-        const newPost = await NewsModel.create({
+        await NewsModel.create({
             id: id,
             title: title,
             slug: id,
@@ -369,8 +369,8 @@ async function AllSlugNews(req: Request, res: Response) {
 }
 
 async function Testslug(req: Request, res: Response) {
-    const slug= req.body.slug;
-    const return_slug =convertToSlug(slug)
+    const slug = req.body.slug;
+    const return_slug = convertToSlug(slug)
     return res.json(return_slug)
 }
 

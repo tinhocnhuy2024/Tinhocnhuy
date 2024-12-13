@@ -56,15 +56,6 @@ async function loadTypes_News(req: Request, res: Response) {
     }
 }
 
-async function loadTypes_News2(req: Request, res: Response) {
-    try {
-        const name = req.body.name
-        const type = await Types_News_Model.findOne({ id: name })
-        return res.json(type?.name)
-    } catch (error) {
-        return res.status(500).json(error)
-    }
-}
 async function loadAllType_News(req: Request, res: Response) {
     try {
         const allType = await Types_News_Model.find({});

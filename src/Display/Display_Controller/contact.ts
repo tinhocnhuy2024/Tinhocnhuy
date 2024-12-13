@@ -18,7 +18,6 @@ async function createContact(req: Request, res: Response) {
             return res.status(400).json({ error: "Vui lòng điền đầy đủ thông tin" })
         } else {
            await ContactModel.create({
-                // id: 'CT',
                 contact: contact,
                 map: map
             })

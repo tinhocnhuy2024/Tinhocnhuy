@@ -7,7 +7,6 @@ export async function authorize(req: Request, res: Response, next: NextFunction)
         if (!account) {
             res.status(403).send('Access denied.')
         } 
-        // return res.json(account?.role)
         if (account?.role == false) {
             return res.status(403).send('Từ chối truy cập.')
         }else{

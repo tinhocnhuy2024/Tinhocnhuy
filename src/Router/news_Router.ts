@@ -39,7 +39,6 @@ news_Router.get('/allslugnews', News.AllSlugNews)
 
 news_Router.get('/testslug', News.Testslug)
 
-//upload hình ảnh lên cloudinary , sử dụng cho Tin tức
 news_Router.post('/uploadimagesNews', midlleware_file, News.uploadImagesNews)
 
 export default news_Router;

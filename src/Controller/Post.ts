@@ -13,7 +13,7 @@ export async function uploadImagesPost(req: Request, res: Response) {
         return res.status(400).json({ message: 'No file uploaded' });
     }
     try {
-        const result = await cloudinary.uploader.upload_stream({ resource_type: 'auto', folder: 'Tinhocnhuy.com' },
+        await cloudinary.uploader.upload_stream({ resource_type: 'auto', folder: 'Tinhocnhuy.com' },
             async (error, result) => {
                 if (error) {
                     console.error('Upload failed:', error);
@@ -74,7 +74,7 @@ async function createPost(req: Request, res: Response) {
         }
         thumbnailUrl = await uploadImageToCloudinary(linkfile)
 
-        const newPost = await PostModel.create({
+        await PostModel.create({
             id: id,
             title: title,
             slug: id,

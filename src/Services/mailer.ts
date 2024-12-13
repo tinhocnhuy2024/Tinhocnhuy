@@ -11,7 +11,7 @@ function generateRandomNumber(): number {
   return Math.floor(Math.random() * 1000000);
 }
 
-let testAccount = nodemailer.createTestAccount();
+nodemailer.createTestAccount();
 let transporter = nodemailer.createTransport({
   service: "Gmail",
   pool:true,
@@ -30,17 +30,17 @@ export const OTPDangki = async function mail(req: Request, res: Response) {
 
   const random = await generateRandomNumber();
 
-  const templatePath = path.join(__dirname, '../themeEmail/templateEmail.ejs');//
-  const htmlMail = fs.readFileSync(templatePath, 'utf-8')//
-  const renderedTemplate = ejs.render(htmlMail, { otp: random });//
+  const templatePath = path.join(__dirname, '../themeEmail/templateEmail.ejs');
+  const htmlMail = fs.readFileSync(templatePath, 'utf-8')
+  const renderedTemplate = ejs.render(htmlMail, { otp: random });
   const countDownTime = 60 * 1000;
-  let countdown = setTimeout(() => {//
+  setTimeout(() => {
     randomNumber = 0;
   }, countDownTime);
 
   const msg = {
-    to: email, // Change to your recipient
-    from: 'websitetinhocnhuy@gmail.com', // Change to your verified sender
+    to: email,
+    from: 'websitetinhocnhuy@gmail.com',
     subject: 'CÔNG TY TNHH TM&DV TIN HỌC NHƯ Ý',
     text: 'and easy to do anywhere, even with Node.js',
     html: renderedTemplate,
@@ -63,7 +63,7 @@ export const sendMail_ForgotPassword = async function mail_forgotPass(req: Reque
   const htmlMail = fs.readFileSync(templatePath, 'utf-8')
   const renderedTemplate = ejs.render(htmlMail, { otp: random });
   const countDownTime = 60 * 1000;
-  let countdown = setTimeout(() => {
+  setTimeout(() => {
     randomNumber_ForgotPassword = 0;
   }, countDownTime);
 
@@ -92,7 +92,7 @@ export const contact = async function Email(req: Request, res: Response) {
   const info = req.body.info
   const text = req.body.text
 
-  let infoemail = await transporter.sendMail({
+  await transporter.sendMail({
     from: `"Khách hàng (${contact}) - Tinhocnhuy.com" <sender@gmail.com>`,
     to: "tinhocnhuy@gmail.com",
     subject: subject,
