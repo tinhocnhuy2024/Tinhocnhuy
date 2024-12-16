@@ -88,15 +88,15 @@ export const sendMail_ForgotPassword = async function mail_forgotPass(req: Reque
 
 export const contact = async function Email(req: Request, res: Response) {
   const contact = req.body.contact
-  const subject = req.body.subject
+  // const subject = req.body.subject
   const info = req.body.info
   const text = req.body.text
 
   await transporter.sendMail({
-    from: `"Khách hàng (${contact}) - Tinhocnhuy.com" <sender@gmail.com>`,
-    to: "tinhocnhuy@gmail.com",
-    subject: subject,
-    html: `<b>${info}</b><b>Nội dung:</b><p> ${text}</p>`
+    from: `"Khách hàng ${contact} - Tinhocnhuy.com"<sender@gmail.com>`,
+    to: "hothanhphuc1204@gmail.com",
+    subject: "YÊU CẦU TƯ VẤN",
+    html: `SĐT Khách hàng: <b>${info}</b><p><b> Nội dung:</b></p><p> ${text}</p>`
   }, (err) => {
     if (err) {
       return res.json({ mess: "loi:", err });
