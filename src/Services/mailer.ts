@@ -94,7 +94,7 @@ export const contact = async function Email(req: Request, res: Response) {
 
   await transporter.sendMail({
     from: `"Khách hàng ${contact} - Tinhocnhuy.com"<sender@gmail.com>`,
-    to: "hothanhphuc1204@gmail.com",
+    to: "tinhocnhuy@gmail.com",
     subject: "YÊU CẦU TƯ VẤN",
     html: `<b>${info}</b><p><b> Nội dung:</b></p><p> ${text}</p>`
   }, (err) => {
