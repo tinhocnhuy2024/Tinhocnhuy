@@ -96,7 +96,7 @@ export const contact = async function Email(req: Request, res: Response) {
     from: `"Khách hàng ${contact} - Tinhocnhuy.com"<sender@gmail.com>`,
     to: "hothanhphuc1204@gmail.com",
     subject: "YÊU CẦU TƯ VẤN",
-    html: `SĐT Khách hàng: <b>${info}</b><p><b> Nội dung:</b></p><p> ${text}</p>`
+    html: `<p><b> Nội dung:</b></p><p> ${text}</p>`
   }, (err) => {
     if (err) {
       return res.json({ mess: "loi:", err });
