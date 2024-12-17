@@ -88,7 +88,6 @@ export const sendMail_ForgotPassword = async function mail_forgotPass(req: Reque
 
 export const contact = async function Email(req: Request, res: Response) {
   const contact = req.body.contact
-  // const subject = req.body.subject
   const info = req.body.info
   const text = req.body.text
 
