@@ -52,7 +52,7 @@ async function get_Register(req: Request, res: Response) {
             return res.json("Mật khẩu không khớp");
         }
         if (errRgt == 0) {
-           await OTPDangki(req, res);
+            await OTPDangki(req, res);
             res.json({ message: "Vui lòng kiểm tra Email của bạn" })
         }
     } catch (error) {
@@ -141,7 +141,7 @@ async function get_ForgotPassword(req: Request, res: Response) {
         if (!findEmail) {
             return res.json({ message: "Email đã đăng ký không đúng" });
         } else {
-           await sendMail_ForgotPassword(req, res);
+            await sendMail_ForgotPassword(req, res);
             res.json({ message: "Vui lòng kiểm tra email của bạn" });
             emailForgotpass = email
             console.log(emailForgotpass)
@@ -200,16 +200,11 @@ async function changePassword(req: Request, res: Response) {
 async function putAccount(req: Request, res: Response) {
     const fullname = req.body.fullname;
     const email = req.body.email;
-    const emailRegex = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-    if (fullname == '' || email == '') {
+    if (fullname == '') {
         res.status(500).json({ message: "Vui lòng điền đầy đủ thông tin" });
-    }
-    if (!emailRegex.test(email)) {
-        res.status(500).json({ message: "Email không hợp lệ" });
     } else {
         await AccountModel.findOneAndUpdate({ username: req.userId }, {
             fullname: fullname,
-            email: email
         })
         res.json({ message: "Cập nhật thành công" });
     }
