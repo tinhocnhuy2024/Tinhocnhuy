@@ -46,10 +46,10 @@ export async function deleteImageFromCloudinary(publicId: string) {
 }
 
 export function convertToSlug(title: string): string {
-    const sanitizedTitle = title.replace(/\//g, '-');
-    const slug = slugify(sanitizedTitle, {
-        lower: true,        
-        remove: /[*+~.()'"!:@]/g,
-    });
+    const sanitizedTitle = title.replace(/\//g, '-')
+    const slug = slugify(sanitizedTitle, { 
+        locale: 'vi', 
+        lower: true, 
+        remove: /[*+~.,()'"!:@]/g })
     return slug;
-}
+};

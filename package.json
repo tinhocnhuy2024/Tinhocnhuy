@@ -57,7 +57,7 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4",
     "unidecode": "^0.1.8",
-    "uuid": "^9.0.0"
+    "uuid": "^11.0.5"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
