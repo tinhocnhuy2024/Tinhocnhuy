@@ -9,4 +9,6 @@ Authentication_Router.get('/allaccount', middleware, authorize, Authentication.A
 
 Authentication_Router.post('/updateauth/:username', middleware, authorize, Authentication.updateRole);
 
+Authentication_Router.post('/deleteaccount/:username', middleware, authorize, Authentication.deleteAccount)
+
 export default Authentication_Router;

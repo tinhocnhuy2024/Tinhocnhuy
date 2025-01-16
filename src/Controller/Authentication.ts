@@ -25,7 +25,23 @@ async function updateRole(req: Request, res: Response) {
 
 }
 
+async function deleteAccount(req: Request, res: Response) {
+
+    try {
+        const username = req.params.username;
+        if (req.userId == username) {
+            return res.status(400).json("Lỗi ???")
+        } else {
+            await AccountModel.findOneAndDelete({ username: username })
+            return res.json({ message: "Đã xoá" })
+        }
+    } catch (error) {
+        return res.json({ message: error })
+    }
+}
+
 export const Authentication = {
     AllAccount,
-    updateRole
+    updateRole,
+    deleteAccount
 }
